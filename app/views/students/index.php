@@ -1,3 +1,6 @@
+<?php require_once '../includes/header.php'; ?>
+
+
 <h1>Liste des élèves</h1>
 <a href="/students/add">Ajouter un élève</a>
 <table>
@@ -23,3 +26,5 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+
+<?php require_once '../includes/footer.php'; ?>
