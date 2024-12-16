@@ -2,27 +2,40 @@
 require_once '../config/db.php';
 require_once '../app/controllers/StudentsController.php';
 require_once '../app/models/Student.php';
+require_once '../app/controllers/SubjectsController.php';
+require_once '../app/models/Subject.php';
 
 // Exemple de routage simple sans framework
 $request = $_SERVER['REQUEST_URI'];
 
-$controller = new StudentsController($db);
+$studentController = new StudentsController($db);
+$subjectController = new SubjectsController($db);
 
-// Vérifie si la route est "/students/add"
+// Routes pour les étudiants
 if ($request == '/students/add') {
-    $controller->add();
-} 
-// Vérifie si la route correspond à "/students/edit/{id}" (avec l'ID dynamique)
-elseif (preg_match('/^\/students\/edit\/(\d+)$/', $request, $matches)) {
-    $id = $matches[1];  // L'ID de l'élève est capturé
-    $controller->edit($id);  // Passe l'ID à la méthode edit du contrôleur
+    $studentController->add();
+} elseif (preg_match('/^\/students\/edit\/(\d+)$/', $request, $matches)) {
+    $id = $matches[1];
+    $studentController->edit($id);
+} elseif (preg_match('/^\/students\/delete\/(\d+)$/', $request, $matches)) {
+    $id = $matches[1];
+    $studentController->delete($id);
+} elseif ($request == '/students') {
+    $studentController->index(); // Route par défaut des étudiants
 
-} // Vérifie si la route correspond à "/students/delete/{id}" (avec l'ID dynamique)
-elseif (preg_match('/^\/students\/delete\/(\d+)$/', $request, $matches)) {
-    $id = $matches[1];  // L'ID de l'élève à supprimer
-    $controller->delete($id);  // Appel de la méthode delete() du contrôleur
-}
-else {
-    // Route par défaut
-    $controller->index();
+// Routes pour les matières (subjects)
+} elseif ($request == '/subjects/add') {
+    $subjectController->add();
+} elseif (preg_match('/^\/subjects\/edit\/(\d+)$/', $request, $matches)) {
+    $id = $matches[1];
+    $subjectController->edit($id);
+} elseif (preg_match('/^\/subjects\/delete\/(\d+)$/', $request, $matches)) {
+    $id = $matches[1];
+    $subjectController->delete($id);
+} elseif ($request == '/subjects') {
+    $subjectController->index(); // Route par défaut des matières
+
+// Route par défaut si aucune correspondance
+} else {
+    echo "404 Not Found";
 }
