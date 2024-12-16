@@ -15,6 +15,7 @@ class GradesController {
     public function index($student_id)
     {
         $grades = $this->gradeModel->getGradesByStudent($student_id);
+        $student = $this->studentModel->getStudent($student_id);
         require_once "../app/views/grades/index.php";
     }
 

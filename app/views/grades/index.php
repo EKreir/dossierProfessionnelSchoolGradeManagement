@@ -1,6 +1,6 @@
 <?php require_once '../includes/header.php'; ?>
 
-<h1>Notes de l'élève</h1>
+<h1>Notes de <?= htmlspecialchars($student['first_name']) . ' ' . htmlspecialchars($student['last_name']); ?></h1>
 
 <table>
     <thead>
