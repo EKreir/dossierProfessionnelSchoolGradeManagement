@@ -1,4 +1,4 @@
-<?php require_once 'includes/header.php'; // Inclure l'entête de ton site ?>
+<?php require_once '../includes/header.php'; // Inclure l'entête de ton site ?>
 
 <h1>Modifier les informations de l'élève</h1>
 
@@ -22,4 +22,4 @@
 <!-- Retour à la liste des élèves -->
 <p><a href="/students">Retour à la liste des élèves</a></p>
 
-<?php require_once 'includes/footer.php'; // Inclure le pied de page de ton site ?>
+<?php require_once '../includes/footer.php'; // Inclure le pied de page de ton site ?>

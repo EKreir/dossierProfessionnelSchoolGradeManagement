@@ -11,8 +11,10 @@ $controller = new StudentsController($db);
 // Vérifie si la route est "/students/add"
 if ($request == '/students/add') {
     $controller->add();
-} elseif ($request == '/students/edit') {
-    $controller->edit(); // Assure-toi de gérer les autres routes
+} // Vérifie si la route correspond à "/students/edit/{id}" (avec l'ID dynamique)
+elseif (preg_match('/^\/students\/edit\/(\d+)$/', $request, $matches)) {
+    $id = $matches[1];  // L'ID de l'élève est capturé
+    $controller->edit($id);  // Passe l'ID à la méthode edit du contrôleur
 } else {
     // Route par défaut
     $controller->index();
