@@ -1,8 +1,10 @@
 <?php require_once '../includes/header.php'; ?>
 
-
 <h1>Liste des élèves</h1>
-<a href="/students/add">Ajouter un élève</a>
+
+<p><a href="/students/add">Ajouter un élève</a></p>
+
+
 <table>
     <thead>
         <tr>
@@ -14,17 +16,21 @@
     </thead>
     <tbody>
         <?php foreach ($students as $student): ?>
-        <tr>
-            <td><?= $student['first_name'] ?></td>
-            <td><?= $student['last_name'] ?></td>
-            <td><?= $student['birthdate'] ?></td>
-            <td>
-                <a href="/students/edit/<?= $student['id'] ?>">Modifier</a> |
-                <a href="/students/delete/<?= $student['id'] ?>" onclick="return confirm('Etes-vous sûr de vouloir supprimer cet élève ?');">Supprimer</a>
-            </td>
-        </tr>
+            <tr>
+                <td><?= htmlspecialchars($student['first_name']); ?></td>
+                <td><?= htmlspecialchars($student['last_name']); ?></td>
+                <td><?= htmlspecialchars($student['birthdate']); ?></td>
+                <td>
+                    <!-- Lien vers la page des notes de l'élève -->
+                    <a href="/grades/<?= $student['id']; ?>">Voir les notes</a>
+                    <!-- Autres actions possibles (modifier, supprimer, etc.) -->
+                    <a href="/students/edit/<?= $student['id']; ?>">Modifier</a>
+                    <a href="/students/delete/<?= $student['id']; ?>" onclick="return confirm('Etes-vous sûr de vouloir supprimer cet élève ?');">Supprimer</a>
+                </td>
+            </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
 
 <?php require_once '../includes/footer.php'; ?>
+

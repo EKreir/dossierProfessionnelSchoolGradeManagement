@@ -1,4 +1,8 @@
 <?php
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 // Vérifier si l'URL de la page est juste "/" (c'est-à-dire la racine)
 $request = $_SERVER['REQUEST_URI'];
 
@@ -47,8 +51,12 @@ if (strpos($request, '/students') === 0) {
     }
 } elseif (strpos($request, '/grades') === 0) {
     $controller = new GradesController($db);
-    if ($request == '/grades') {
-        $controller->index();  // Afficher la liste des notes
+    // Vérifie si l'URL contient un ID d'élève
+    if (preg_match('/\/grades\/([0-9]+)/', $request, $matches)) {
+        // L'ID de l'élève est dans $matches[1]
+        $student_id = $matches[1];
+        // Appelle la méthode index en lui passant l'ID de l'élève
+        $controller->index($student_id);  // Afficher les notes de l'élève
     } elseif (preg_match('/\/grades\/add/', $request)) {
         $controller->add(basename($request));  // Ajouter une note
     } elseif (preg_match('/\/grades\/edit/', $request)) {

@@ -1,7 +1,8 @@
 <?php require_once '../includes/header.php'; ?>
 
-<h1>Notes de <?= htmlspecialchars($student['first_name']) . ' ' . htmlspecialchars($student['last_name']); ?></h1>
+<h1>Notes de <?= isset($student) ? htmlspecialchars($student['first_name']) . ' ' . htmlspecialchars($student['last_name']) : 'Élève inconnu'; ?></h1>
 
+<?php if (!empty($grades)): ?>
 <table>
     <thead>
         <tr>
@@ -13,7 +14,7 @@
     <tbody>
         <?php foreach ($grades as $grade): ?>
             <tr>
-                <td><?= htmlspecialchars($grade['subject_name']); ?></td>
+                <td><?= htmlspecialchars($grade['name']); ?></td>
                 <td><?= htmlspecialchars($grade['grade']); ?></td>
                 <td>
                     <a href="/grades/edit/<?= $grade['id']; ?>">Modifier</a>
@@ -23,6 +24,10 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+
+<?php else: ?>
+    <p>Aucune note trouvée pour cet élève.</p>
+<?php endif; ?>
 
 <a href="/grades/add/<?= $student_id; ?>">Ajouter une note</a>
 

@@ -9,16 +9,26 @@ class Grade {
 
     // Récupérer toutes les notes d'un étudiant
     public function getGradesByStudent($student_id)
-    {
-        $query = "SELECT grades.id, subjects.name AS subject_name, grades.grade 
-                  FROM grades
-                  JOIN subjects ON grades.id_subject = subjects.id
-                  WHERE grades.id_student = :student_id";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':student_id', $student_id);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+{
+    $query = "SELECT grades.id, grades.grade, subjects.name
+              FROM grades
+              JOIN subjects ON grades.id_subject = subjects.id
+              WHERE grades.id_student = :student_id";
+    
+    $stmt = $this->db->prepare($query);
+    $stmt->bindParam(':student_id', $student_id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $grades = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Si aucune note n'est trouvée
+    if (empty($grades)) {
+        return [];
     }
+
+    return $grades;
+}
+
 
     // Ajouter une note
     public function addGrade($student_id, $subject_id, $grade)

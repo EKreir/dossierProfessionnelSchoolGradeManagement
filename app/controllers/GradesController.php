@@ -13,11 +13,34 @@ class GradesController {
 
     // Afficher les notes d'un étudiant
     public function index($student_id)
-    {
-        $grades = $this->gradeModel->getGradesByStudent($student_id);
-        $student = $this->studentModel->getStudent($student_id);
-        require_once "../app/views/grades/index.php";
+{
+    // Vérification que $student_id est bien passé
+    if (empty($student_id)) {
+        echo "Erreur : l'ID de l'élève est manquant.";
+        exit;
     }
+
+    // Récupérer les notes de l'élève
+    $grades = $this->gradeModel->getGradesByStudent($student_id);
+
+    // Vérification si les notes sont récupérées correctement
+    if (empty($grades)) {
+        echo "Aucune note trouvée pour l'élève avec l'ID: $student_id";
+        exit;
+    }
+
+    // Récupérer l'élève pour afficher son nom
+    $student = $this->studentModel->getStudent($student_id);
+
+    // Vérification si l'élève est récupéré correctement
+    if (!$student) {
+        echo "L'élève avec l'ID $student_id n'a pas été trouvé.";
+        exit;
+    }
+
+    // Passer les données de l'élève et ses notes à la vue
+    require_once "../app/views/grades/index.php";
+}
 
     // Ajouter une note
     public function add($student_id)
