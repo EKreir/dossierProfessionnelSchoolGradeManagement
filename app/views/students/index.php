@@ -17,7 +17,7 @@
             <td><?= $student['birthdate'] ?></td>
             <td>
                 <a href="/students/edit/<?= $student['id'] ?>">Modifier</a> |
-                <a href="/students/delete/<?= $student['id'] ?>">Supprimer</a>
+                <a href="/students/delete/<?= $student['id'] ?>" onclick="return confirm('Etes-vous sûr de vouloir supprimer cet élève ?');">Supprimer</a>
             </td>
         </tr>
         <?php endforeach; ?>
