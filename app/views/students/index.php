@@ -21,11 +21,13 @@
                 <td><?= htmlspecialchars($student['last_name']); ?></td>
                 <td><?= htmlspecialchars($student['birthdate']); ?></td>
                 <td>
-                    <!-- Lien vers la page des notes de l'élève -->
-                    <a href="/grades/<?= $student['id']; ?>">Voir les notes</a>
                     <!-- Autres actions possibles (modifier, supprimer, etc.) -->
                     <a href="/students/edit/<?= $student['id']; ?>">Modifier</a>
                     <a href="/students/delete/<?= $student['id']; ?>" onclick="return confirm('Etes-vous sûr de vouloir supprimer cet élève ?');">Supprimer</a>
+                    <!-- Lien vers la page des notes de l'élève -->
+                    <a href="/grades/<?= $student['id']; ?>">Voir les notes</a>
+                    <!-- Lien vers la page d'ajout de notes -->
+                    <a href="/grades/add/<?= $student['id']; ?>">Ajouter une note</a>
                 </td>
             </tr>
         <?php endforeach; ?>
