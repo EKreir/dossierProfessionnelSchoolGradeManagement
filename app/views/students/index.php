@@ -1,11 +1,12 @@
 <?php require_once '../includes/header.php'; ?>
 
-<h1>Liste des élèves</h1>
+<h1 class="my-4">Liste des élèves</h1>
 
-<p><a href="/students/add">Ajouter un élève</a></p>
+<!-- Bouton Ajouter un élève avec Bootstrap -->
+<p><a href="/students/add" class="btn btn-success mb-3">Ajouter un élève</a></p>
 
-
-<table>
+<!-- Tableau des élèves avec Bootstrap -->
+<table class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
             <th>Prénom</th>
@@ -21,13 +22,21 @@
                 <td><?= htmlspecialchars($student['last_name']); ?></td>
                 <td><?= htmlspecialchars($student['birthdate']); ?></td>
                 <td>
-                    <!-- Autres actions possibles (modifier, supprimer, etc.) -->
-                    <a href="/students/edit/<?= $student['id']; ?>">Modifier</a>
-                    <a href="/students/delete/<?= $student['id']; ?>" onclick="return confirm('Etes-vous sûr de vouloir supprimer cet élève ?');">Supprimer</a>
-                    <!-- Lien vers la page des notes de l'élève -->
-                    <a href="/grades/<?= $student['id']; ?>">Voir les notes</a>
-                    <!-- Lien vers la page d'ajout de notes -->
-                    <a href="/grades/add/<?= $student['id']; ?>">Ajouter une note</a>
+                    <!-- Lien modifier avec style Bootstrap -->
+                    <a href="/students/edit/<?= $student['id']; ?>" class="btn btn-warning btn-sm">Modifier</a>
+                    
+                    <!-- Lien supprimer avec confirmation et style Bootstrap -->
+                    <a href="/students/delete/<?= $student['id']; ?>" 
+                       class="btn btn-danger btn-sm" 
+                       onclick="return confirm('Etes-vous sûr de vouloir supprimer cet élève ?');">
+                        Supprimer
+                    </a>
+
+                    <!-- Lien voir les notes -->
+                    <a href="/grades/<?= $student['id']; ?>" class="btn btn-info btn-sm">Voir les notes</a>
+
+                    <!-- Lien ajouter une note -->
+                    <a href="/grades/add/<?= $student['id']; ?>" class="btn btn-primary btn-sm">Ajouter une note</a>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -35,4 +44,3 @@
 </table>
 
 <?php require_once '../includes/footer.php'; ?>
-

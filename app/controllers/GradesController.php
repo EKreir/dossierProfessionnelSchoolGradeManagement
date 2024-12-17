@@ -16,7 +16,7 @@ class GradesController {
 {
     // Vérification que $student_id est bien passé
     if (empty($student_id)) {
-        echo "Erreur : l'ID de l'élève est manquant.";
+        echo "Erreur : l'identifiant de l'élève est manquant.";
         exit;
     }
 
@@ -25,7 +25,7 @@ class GradesController {
 
     // Vérification si les notes sont récupérées correctement
     if (empty($grades)) {
-        echo "Aucune note trouvée pour l'élève avec l'ID: $student_id";
+        echo "Aucune note trouvée pour l'élève";
         exit;
     }
 
@@ -34,7 +34,7 @@ class GradesController {
 
     // Vérification si l'élève est récupéré correctement
     if (!$student) {
-        echo "L'élève avec l'ID $student_id n'a pas été trouvé.";
+        echo "L'élève n'a pas été trouvé.";
         exit;
     }
 
