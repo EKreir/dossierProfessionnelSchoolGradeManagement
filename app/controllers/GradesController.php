@@ -2,13 +2,13 @@
 class GradesController {
     private $gradeModel;
     private $subjectModel;
-    private $studentModel; // Ajoute un modèle pour les étudiants
+    private $studentModel;
 
     public function __construct($db)
     {
         $this->gradeModel = new Grade($db);
         $this->subjectModel = new Subject($db);
-        $this->studentModel = new Student($db); // Assurez-vous que ce modèle existe
+        $this->studentModel = new Student($db);
     }
 
     // Afficher les notes d'un étudiant
@@ -74,11 +74,11 @@ public function edit($id)
         // Récupérer à nouveau l'objet de la note mis à jour
         $grade = $this->gradeModel->getGrade($id);
 
-        // Vérifie si la note existe
+        // Vérifier si la note existe
         if ($grade) {
             // Rediriger vers la page des notes de l'élève
             header("Location: /grades/{$grade['id_student']}");
-            exit; // Assurez-vous de sortir immédiatement après la redirection
+            exit;
         } else {
             // Gérer l'erreur si la note n'est pas trouvée
             echo "Erreur: La note n'a pas été trouvée.";

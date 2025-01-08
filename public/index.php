@@ -1,6 +1,6 @@
 <?php
 
-ini_set('display_errors', 1);
+ini_set('display_errors', 1); // Afficher les erreurs
 error_reporting(E_ALL);
 
 // Vérifier si l'URL de la page est juste "/" (c'est-à-dire la racine)
@@ -10,10 +10,9 @@ $request = $_SERVER['REQUEST_URI'];
 if ($request == '/' || $request == '') {
     // Redirige vers la page des élèves
     header("Location: /students");
-    exit; // N'oublie pas d'arrêter l'exécution du script après la redirection
+    exit;
 }
 
-// Reste de ton code de routage
 require_once '../config/db.php';
 require_once '../app/controllers/StudentsController.php';
 require_once '../app/models/Student.php';
@@ -25,10 +24,9 @@ require_once '../app/models/Grade.php';
 // Exemple de routage simple sans framework
 $controller = null;
 
-// Vérifie si la route est "/students", "/subjects" ou "/grades"
+// Vérifier si la route est "/students", "/subjects" ou "/grades"
 if (strpos($request, '/students') === 0) {
     $controller = new StudentsController($db);
-    // Vérifie la méthode utilisée
     if ($request == '/students') {
         $controller->index();  // Afficher la liste des élèves
     } elseif (preg_match('/\/students\/add/', $request)) {
